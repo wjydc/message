@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>留言板</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			list-style-type: none;
+		}
+
+		#wrap{
+			margin: 50px auto;
+			width: 600px;
+			background-color:rgb(241,241,241); 
+		}
+		form{
+			width: 550px;
+			margin: 5px 25px;
+		}
+		#txt1{
+			width: 300px;
+			height: 30px;
+			
+		}
+		#txt2{
+			width: 550px;
+			height: 200px;
+			overflow: scroll;
+		}
+		#btn{
+			width: 50px;
+			height: 30px;
+			border:1px red solid;
+		}
+		p{
+			overflow: hidden;
+			height: 50px;
+			line-height: 50px;
+			font-size: 20px;
+		}
+		a{
+			float: right;
+		}
+		h4{
+			background-color: rgb(213,213,213);
+			height: 30px;
+			
+			line-height: 30px;
+			font-size: 16px;
+		}
+		#box{
+			margin-left: 20px;
+		}
+		#uli li{
+			height: 100px;
+			margin-bottom: 20px;
+			overflow: hidden;
+			
+		}
+
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<form>
+			<ul>
+				<li>姓名：<input type="text" name="" id="txt1"></li>
+				<li>内容：<textarea id="txt2" value=""></textarea></li>
+				<li><input type="button" name="" value="提交" id="btn"></li>
+			</ul>
+		</form>
+
+		<div id="box">
+			<h3>显示留言</h3>
+			<ul id="uli">
+				
+				<!-- <li>
+					<h4>名字:</h4>
+					<p>留言：<a href="#">删除</a></p>
+
+				</li> -->
+			</ul>
+		</div>
+	</div>
+</body>
+<script src="../tween.js"></script>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript"  src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	
+	// var i=0;
+	// $("#btn").click(function(){
+		
+	// 	var a=$("#txt1").val();
+	// 	var b=$("#txt2").val();
+		
+	// 	$("#uli").append("<li></li>"),
+	// 	$("#uli li").eq(i).append("<h4>名字：</h4>"),
+	// 		$("#uli li h4").eq(i).append(a),
+	// 	$("#uli li").eq(i).append("<p>留言：</p>"),
+	// 		$("#uli li p").eq(i).append(b),
+	// 	$("#uli li p").eq(i).append("<a href='#'>删除</a>"),
+	// 	$("#uli li p a").eq(i).click(function(){
+	// 		$(this).parent().parent().remove()
+	// 	})
+
+	// 	i++;
+	// });
+
+	$("#btn").click(function(){
+		if ($("#txt1").val()==""||$("#txt2").val()=="") {
+			alert("不能为空")
+		}else{
+			var lis=$("<li><h4>名字："+$("#txt1").val()+'<p>留言：'+$("#txt2").val()+'<a href="#">删除：</a></p></li>');
+			console.log(lis);
+			$("#uli").prepend(lis);
+			var h=lis.outerHeight();
+			lis.height(0);
+			lis.animate({
+				height:h
+			},600)
+			$("#uli li p a").click(function(){
+
+				$(this).parents("li").animate({
+					height:0
+				},500,function(){
+					$(this).remove()
+				})
+			})
+		}
+	})
+})
+
+</script>
+</html>
